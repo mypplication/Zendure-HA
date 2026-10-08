@@ -24,3 +24,11 @@ class SolarFlow4000AC_Plus(ZendureZenSdk):
     def pwr_offgrid(self) -> int:
         """Get the offgrid power."""
         return self.offGrid.asInt
+
+
+class SolarFlow4000MixPro(SolarFlow4000AC_Plus):
+    def __init__(self, hass: HomeAssistant, deviceId: str, prodName: str, definition: Any) -> None:
+        """Initialise SolarFlow4000MixPro."""
+        # Same hardware platform as the Mix AC+, but it reports chargeMaxLimit=4000 and inverseMaxPower=3000.
+        super().__init__(hass, deviceId, prodName, definition)
+        self.setLimits(-4000, 3000)
