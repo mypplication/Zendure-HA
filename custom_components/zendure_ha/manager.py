@@ -427,7 +427,7 @@ class ZendureManager(DataUpdateCoordinator[None], EntityDevice):
     async def powerChanged(self, p1: int, isFast: bool, time: datetime) -> None:
         """Return the distribution setpoint."""
         availableKwh = 0
-        setpoint = p1
+        setpoint = int(p1 * SmartMode.P1_GAIN)
         power = 0
         totalStoredkWh = 0
         onlinekWh = 0
